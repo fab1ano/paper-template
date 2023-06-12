@@ -26,9 +26,10 @@ TARGET_DEPS  := $(TEX_SOURCES) $(LST_SOURCES) $(PLAIN_IMG) $(DRAW_IMG) $(PLOT_IM
 
 
 .PHONY:
-all: $(TARGET).pdf
+all: $(TARGET).pdf $(TARGET).md
 
 $(TARGET).pdf: $(TARGET_DEPS)
+$(TARGET).md: $(TARGET_DEPS)
 
 .PHONY:
 png-images: $(DRAW_IMG_PNG)
@@ -39,6 +40,9 @@ images-slides: $(DRAW_IMG_SLIDES)
 %.pdf: %.tex $(BIBLIO)
 	TEXINPUTS=$(STY_DIR): ./bin/latexrun --latex-args="-synctex=1 --shell-escape -file-line-error -interaction=nonstopmode" -O $(BUILD_DIR) $<
 	cp $(BUILD_DIR)/$@ $@
+
+%.md: %.tex $(BIBLIO)
+	pandoc --wrap=none -s $< -o $@ --filter ./bin/omit_references.py
 
 $(BUILD_DIR)/$(TARGET).aux:
 	@make $(all)
@@ -78,7 +82,7 @@ clean:
 
 .PHONY:
 distclean: clean
-	rm -f $(TARGET).pdf
+	rm -f $(TARGET).pdf $(TARGET).md
 
 .PHONY:
 loop:
