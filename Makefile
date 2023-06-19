@@ -13,7 +13,7 @@ PLT_SOURCES  := $(wildcard plots-src/*.plot) $(wildcard plots-src/*.txt)
 LST_SOURCES  := $(wildcard listings/*)
 
 # These are used in the paper
-PLAIN_IMG    := $(wildcard images-plain/*.png)
+PLAIN_IMG    := $(wildcard images-plain/*)
 DRAW_IMG     := $(patsubst images-src/%.drawio,images/%.pdf,$(IMG_SOURCES))
 PLOT_IMG     := $(patsubst plots-src/%.plot,plots/%.tex,$(PLT_SOURCES))
 
