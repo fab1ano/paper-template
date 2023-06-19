@@ -18,4 +18,3 @@ This template is inspired by and some parts are taken from [die](https://github.
 
 ### TODOs
 - Support for gnuplot and plots from python scripts
-- pdftotext (including abstract.txt)
